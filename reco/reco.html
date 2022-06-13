@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>An Empirical Exploration of the Vibrant R Ecosystem</title>
+
+  <meta property="description" itemprop="description" content="Created in the late 20th century, R is one of the most popular software environments for statistical computing and graphics. Embracing the development of information technology and the advent of the big data era, great changes have taken place in the R ecosystem during recent years.  An empirical review is carried out based on meta-information of CRAN and bibliometric data of the literature citing R. We discovered that while initiated by statistics, the development of R benefited greatly from software developers and users coming from various disciplines such as agricultural, biological, environmental, and medical science. In addition, we show the collaboration patterns among R developers and analyze the possible effects of collaboration in the R community. By exploring the R ecosystem and making critical discussions, we intend to gain a better understanding of the current R ecosystem and provide a reference for the ecosystem&#39;s future development."/>
+
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+
+  <meta name="article:author" content="Tian-Yuan Huang"/>
+  <meta name="article:author" content="Liying Yang"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="An Empirical Exploration of the Vibrant R Ecosystem"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Created in the late 20th century, R is one of the most popular software environments for statistical computing and graphics. Embracing the development of information technology and the advent of the big data era, great changes have taken place in the R ecosystem during recent years.  An empirical review is carried out based on meta-information of CRAN and bibliometric data of the literature citing R. We discovered that while initiated by statistics, the development of R benefited greatly from software developers and users coming from various disciplines such as agricultural, biological, environmental, and medical science. In addition, we show the collaboration patterns among R developers and analyze the possible effects of collaboration in the R community. By exploring the R ecosystem and making critical discussions, we intend to gain a better understanding of the current R ecosystem and provide a reference for the ecosystem&#39;s future development."/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="An Empirical Exploration of the Vibrant R Ecosystem"/>
+  <meta property="twitter:description" content="Created in the late 20th century, R is one of the most popular software environments for statistical computing and graphics. Embracing the development of information technology and the advent of the big data era, great changes have taken place in the R ecosystem during recent years.  An empirical review is carried out based on meta-information of CRAN and bibliometric data of the literature citing R. We discovered that while initiated by statistics, the development of R benefited greatly from software developers and users coming from various disciplines such as agricultural, biological, environmental, and medical science. In addition, we show the collaboration patterns among R developers and analyze the possible effects of collaboration in the R community. By exploring the R ecosystem and making critical discussions, we intend to gain a better understanding of the current R ecosystem and provide a reference for the ecosystem&#39;s future development."/>
+
+  <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=On the development and distribution of r packages: An empirical analysis of the r ecosystem;citation_publication_date=2015;citation_author=Alexandre Decan;citation_author=Tom Mens;citation_author=Maelick Claes;citation_author=Philippe Grosjean"/>
+  <meta name="citation_reference" content="citation_title=Bioconductor: Open software development for computational biology and bioinformatics;citation_publication_date=2004;citation_volume=5;citation_doi=10.1186/gb-2004-5-10-r80;citation_author=Robert C. Gentleman;citation_author=Vincent J. Carey;citation_author=Douglas M. Bates;citation_author=Ben Bolstad;citation_author=Marcel Dettling;citation_author=Sandrine Dudoit;citation_author=Byron Ellis;citation_author=Laurent Gautier;citation_author=Yongchao Ge;citation_author=Jeff Gentry;citation_author=Kurt Hornik;citation_author=Torsten Hothorn;citation_author=Wolfgang Huber;citation_author=Stefano Iacus;citation_author=Rafael Irizarry;citation_author=Friedrich Leisch;citation_author=Cheng Li;citation_author=Martin Maechler;citation_author=Anthony J. Rossini;citation_author=Gunther Sawitzki;citation_author=Colin Smith;citation_author=Gordon Smyth;citation_author=Luke Tierney;citation_author=Jean YH Yang;citation_author=Jianhua Zhang"/>
+  <meta name="citation_reference" content="citation_title=The evolution of the r software ecosystem;citation_publication_date=2013;citation_publisher=IEEE;citation_author=Daniel M. German;citation_author=Bram Adams;citation_author=Ahmed E. Hassan"/>
+  <meta name="citation_reference" content="citation_title=A longitudinal case study of an emerging software ecosystem: Implications for practice and theory;citation_publication_date=2012;citation_volume=85;citation_author=Geir K. Hanssen"/>
+  <meta name="citation_reference" content="citation_title=Python: Characteristics identification of a free open source software ecosystem;citation_publication_date=2013;citation_author=Rick Hoving;citation_author=Gabriel Slot;citation_author=Slinger Jansen"/>
+  <meta name="citation_reference" content="citation_title=Orchestrating high-throughput genomic analysis with bioconductor;citation_publication_date=2015;citation_volume=12;citation_doi=10.1038/nmeth.3252;citation_author=Wolfgang Huber;citation_author=Vincent J. Carey;citation_author=Robert Gentleman;citation_author=Simon Anders;citation_author=Marc Carlson;citation_author=Benilton S. Carvalho;citation_author=Hector Corrada Bravo;citation_author=Sean Davis;citation_author=Laurent Gatto;citation_author=Thomas Girke;citation_author=Raphael Gottardo;citation_author=Florian Hahne;citation_author=Kasper D. Hansen;citation_author=Rafael A. Irizarry;citation_author=Michael Lawrence;citation_author=Michael I. Love;citation_author=James MacDonald;citation_author=Valerie Obenchain;citation_author=Andrzej K. Oles;citation_author=Herve Pages;citation_author=Alejandro Reyes;citation_author=Paul Shannon;citation_author=Gordon K. Smyth;citation_author=Dan Tenenbaum;citation_author=Levi Waldron;citation_author=Martin Morgan"/>
+  <meta name="citation_reference" content="citation_title=Strategy as ecology.;citation_publication_date=2004;citation_volume=82;citation_author=Marco Iansiti;citation_author=Roy Levien"/>
+  <meta name="citation_reference" content="citation_title=R: Past and future history;citation_publication_date=1998;citation_volume=392-396;citation_author=Ross Ihaka"/>
+  <meta name="citation_reference" content="citation_title=R: A language for data analysis and graphics;citation_publication_date=1996;citation_volume=5;citation_author=Ross Ihaka;citation_author=Robert Gentleman"/>
+  <meta name="citation_reference" content="citation_title=Measuring the health of open source software ecosystems: Beyond the scope of project health;citation_publication_date=2014;citation_volume=56;citation_author=Slinger Jansen"/>
+  <meta name="citation_reference" content="citation_title=Steering insight: An exploration of the ruby software ecosystem;citation_publication_date=2011;citation_publisher=Springer;citation_author=Jaap Kabbedijk;citation_author=Slinger Jansen"/>
+  <meta name="citation_reference" content="citation_title=Spatial data analysis with r programming for environment;citation_publication_date=2019;citation_volume=25;citation_doi=10.1080/10807039.2018.1470896;citation_author=Efdal Kaya;citation_author=Muge Agca;citation_author=Fatih Adiguzel;citation_author=Mehmet Cetin"/>
+  <meta name="citation_reference" content="citation_title=Evaluating the popularity of r in ecology;citation_publication_date=2019;citation_volume=10;citation_author=Jiangshan Lai;citation_author=Christopher J. Lortie;citation_author=Robert A. Muenchen;citation_author=Jian Yang;citation_author=Keping Ma"/>
+  <meta name="citation_reference" content="citation_title=Challenges of measuring software impact through citations: An examination of the lme4 r package;citation_publication_date=2019;citation_volume=13;citation_author=Kai Li;citation_author=Pei-Ying Chen;citation_author=Erjia Yan"/>
+  <meta name="citation_reference" content="citation_title=How is r cited in research outputs? Structure, impacts, and citation standard;citation_publication_date=2017;citation_volume=11;citation_author=Kai Li;citation_author=Erjia Yan;citation_author=Yuanyuan Feng"/>
+  <meta name="citation_reference" content="citation_title=Co-mention network of r packages: Scientific impact and clustering structure;citation_publication_date=2018;citation_volume=12;citation_author=Kai Li;citation_author=Erjia Yan"/>
+  <meta name="citation_reference" content="citation_title=Our path to better science in less time using open data science tools;citation_publication_date=2017;citation_volume=1;citation_author=Julia S. Stewart Lowndes;citation_author=Benjamin D. Best;citation_author=Courtney Scarborough;citation_author=Jamie C. Afflerbach;citation_author=Melanie R. Frazier;citation_author=Casey C. O Hara;citation_author=Ning Jiang;citation_author=Benjamin S. Halpern"/>
+  <meta name="citation_reference" content="citation_title=Software ecosystems-a systematic literature review;citation_publication_date=2013;citation_volume=86;citation_author=Konstantinos Manikas;citation_author=Klaus Marius Hansen"/>
+  <meta name="citation_reference" content="citation_title=Software ecosystem: Understanding an indispensable technology and industry;citation_publication_date=2003;citation_publisher=MIT press;citation_author=David G. Messerschmitt;citation_author=Clemens Szyperski"/>
+  <meta name="citation_reference" content="citation_title=The r software environment in reproducible geoscientific research;citation_publication_date=2012;citation_volume=93;citation_doi=10.1029/2012EO160003;citation_author=Edzer Pebesma;citation_author=Daniel Nust;citation_author=Roger Bivand"/>
+  <meta name="citation_reference" content="citation_title=Evolution of the r software ecosystem: Metrics, relationships, and their impact on qualities;citation_publication_date=2017;citation_volume=132;citation_author=Konstantinos Plakidas;citation_author=Daniel Schall;citation_author=Uwe Zdun"/>
+  <meta name="citation_reference" content="citation_title=Socio-technical congruence in the ruby ecosystem;citation_publication_date=2014;citation_author=MM Mahbubul Syeed;citation_author=Klaus Marius Hansen;citation_author=Imed Hammouda;citation_author=Konstantinos Manikas"/>
+  <meta name="citation_reference" content="citation_title=The increasing dominance of teams in production of knowledge;citation_publication_date=2007;citation_volume=316;citation_doi=10.1126/science.1136099;citation_author=Stefan Wuchty;citation_author=Benjamin F. Jones;citation_author=Brian Uzzi"/>
+  <meta name="citation_reference" content="citation_title=How important is scientific software in bioinformatics research? A comparative study between international and chinese research communities;citation_publication_date=2018;citation_volume=69;citation_doi=https://doi.org/10.1002/asi.24031;citation_author=Bo Yang;citation_author=Ronald Rousseau;citation_author=Xue Wang;citation_author=Shuiqing Huang"/>
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","draft","author","type","output","bibliography","journal","slug","pdf_url","citation_url","doi","creative_commons","packages","CTV","csl"]}},"value":[{"type":"character","attributes":{},"value":["An Empirical Exploration of the Vibrant R Ecosystem"]},{"type":"character","attributes":{},"value":["Created in the late 20th century, R is one of the most popular software environments for statistical computing and graphics. Embracing the development of information technology and the advent of the big data era, great changes have taken place in the R ecosystem during recent years.  An empirical review is carried out based on meta-information of CRAN and bibliometric data of the literature citing R. We discovered that while initiated by statistics, the development of R benefited greatly from software developers and users coming from various disciplines such as agricultural, biological, environmental, and medical science. In addition, we show the collaboration patterns among R developers and analyze the possible effects of collaboration in the R community. By exploring the R ecosystem and making critical discussions, we intend to gain a better understanding of the current R ecosystem and provide a reference for the ecosystem's future development.\n"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation","address","orcid_id","email"]}},"value":[{"type":"character","attributes":{},"value":["Tian-Yuan Huang"]},{"type":"character","attributes":{},"value":["National Science Library, Chinese Academy of Sciences"]},{"type":"character","attributes":{},"value":["Beijing, China"]},{"type":"character","attributes":{},"value":["0000-0002-4151-3764"]},{"type":"character","attributes":{},"value":["huangtianyuan@mail.las.ac.cn"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation","address","email"]}},"value":[{"type":"character","attributes":{},"value":["Liying Yang"]},{"type":"character","attributes":{},"value":["National Science Library, Chinese Academy of Sciences"]},{"type":"character","attributes":{},"value":["Beijing, China"]},{"type":"character","attributes":{},"value":["yangly@mail.las.ac.cn"]}]}]},{"type":"character","attributes":{},"value":["Reviews and proposals"]},{"type":"character","attributes":{},"value":["rjtools::rjournal_web_article"]},{"type":"character","attributes":{},"value":["RJreferences.bib"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","issn","firstpage","lastpage"]}},"value":[{"type":"character","attributes":{},"value":["The R Journal"]},{"type":"character","attributes":{},"value":["2073-4859"]},{"type":"NULL"},{"type":"NULL"}]},{"type":"character","attributes":{},"value":["reco"]},{"type":"character","attributes":{},"value":["reco.pdf"]},{"type":"character","attributes":{},"value":["https://doi.org/10.32614/reco"]},{"type":"character","attributes":{},"value":["10.32614/reco"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["cran","bioc"]}},"value":[{"type":"character","attributes":{},"value":["cranlogs","RWsearch","rscopus","tidyverse","data.table","patchwork","changepoint","lubridate","fst","akc","graphlayouts","tidyfst","ggplot2","stringr","stringi","dplyr","Rcpp","digest","rlang","R6","magrittr","tibble","pillar","lifecycle","cli","fansi","glue","aws.s3","aws.ec2metadata","doParallel","openxlsx","pdftools","sparklyr"]},{"type":"list","attributes":{},"value":[]}]},{"type":"character","attributes":{},"value":["Databases","Epidemiology","Finance","HighPerformanceComputing","ModelDeployment","NaturalLanguageProcessing","NumericalMathematics","ReproducibleResearch","Spatial","TeachingStatistics","TimeSeries","WebTechnologies"]},{"type":"character","attributes":{},"value":["D:/software/R-4.1.3/library/rjtools/rjournal.csl"]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["fig1.png","fig2.png","fig3.png","fig4.png","fig5.png","fig6.png","fig7.png","reco.pdf","reco.tex","reco_files/anchor-4.2.2/anchor.min.js","reco_files/bowser-1.9.3/bowser.min.js","reco_files/distill-2.2.21/template.v2.js","reco_files/figure-latex/penguins-ggplot-1.pdf","reco_files/header-attrs-2.13/header-attrs.js","reco_files/jquery-3.6.0/jquery-3.6.0.js","reco_files/jquery-3.6.0/jquery-3.6.0.min.js","reco_files/jquery-3.6.0/jquery-3.6.0.min.map","reco_files/popper-2.6.0/popper.min.js","reco_files/tippy-6.2.7/tippy-bundle.umd.min.js","reco_files/tippy-6.2.7/tippy-light-border.css","reco_files/tippy-6.2.7/tippy.css","reco_files/tippy-6.2.7/tippy.umd.min.js","reco_files/webcomponents-2.0.0/webcomponents.js","RJournal.sty","RJreferences.bib","RJwrapper.tex"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="reco_files/header-attrs-2.13/header-attrs.js"></script>
+  <script src="reco_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="reco_files/popper-2.6.0/popper.min.js"></script>
+  <link href="reco_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="reco_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="reco_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="reco_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="reco_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="reco_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="reco_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+  <script>
+    $(function() {
+      console.log("Starting...")
+
+      // Always show Published - distill hides it if not set
+      function show_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'visible');
+      }
+
+      show_byline_column('Published')
+
+      // tweak function
+      var rmd_meta = JSON.parse($("#radix-rmarkdown-metadata").html());
+      function get_meta(name, meta) {
+        var ind = meta.attributes.names.value.findIndex((e) => e == name)
+        var val = meta.value[ind]
+        if (val.type != 'list') {
+          return val.value.toString()
+        }
+        return val
+      }
+
+      // tweak description
+      // Add clickable tags
+      const slug = get_meta('slug', rmd_meta)
+      const doi = get_meta('doi', rmd_meta)
+
+      var title = $("d-title").text
+
+      const buttons = $('<div class="dt-tags" style="grid-column: page;">')
+      buttons.append('<a href="#citation" class="dt-tag"><i class="fas fa-quote-left"></i> Cite</a>')
+      buttons.append('<a href="' + slug + '.pdf" class="dt-tag"><i class="fas fa-file-pdf"></i> PDF</a>')
+      buttons.append('<a href="https://twitter.com/intent/tweet?text='+title+'&url=https%3A%2F%2Fdoi.org%2F' + doi + '" class="dt-tag"><i class="fab fa-twitter"></i> Tweet</a>')
+
+      const abstract = $('<d-abstract>')
+      abstract.append('<b>Abstract:</b><br>')
+      abstract.append($("d-title p:not(:empty)").first()) // Move description to d-abstract
+      $("d-title p:empty").remove() // Remove empty paragraphs after title
+      abstract.append(buttons)
+      abstract.insertAfter($('d-title')) // Add abstract section after title
+
+      // tweak by-line
+      var byline = $("d-byline div.byline")
+      ind = rmd_meta.attributes.names.value.findIndex((e) => e == "journal")
+      const journal = get_meta('journal', rmd_meta)
+      const volume = get_meta('volume', rmd_meta)
+      const issue = get_meta('issue', rmd_meta)
+      const jrtitle = get_meta('title', journal)
+      const firstpage = get_meta('firstpage', journal)
+      const lastpage = get_meta('lastpage', journal)
+      byline.append('<div class="rjournal grid">')
+      $('div.rjournal').append('<h3>Volume</h3>')
+      $('div.rjournal').append('<h3>Pages</h3>')
+      $('div.rjournal').append('<p class="volume">'+volume+':'+issue+'</p>')
+      $('div.rjournal').append('<p class="pages">'+firstpage+' - '+lastpage+'</p>')
+
+      const received_date = get_meta('date_received', rmd_meta)
+      byline.find('h3:contains("Published")').parent().append('<h3>Received</h3><p>'+received_date+'</p>')
+
+    })
+  </script>
+
+  <style>
+      /*
+    .nav-dropdown-content .nav-dropdown-header {
+      text-transform: lowercase;
+    }
+    */
+
+    d-byline .byline {
+      grid-template-columns: 2fr 2fr 2fr 2fr;
+    }
+
+    d-byline .rjournal {
+      grid-column-end: span 2;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 0;
+    }
+
+    d-title h1, d-title p, d-title figure,
+    d-abstract p, d-abstract b {
+      grid-column: page;
+    }
+
+    d-title .dt-tags {
+      grid-column: page;
+    }
+
+    .dt-tags .dt-tag {
+      text-transform: lowercase;
+    }
+
+    d-article h1 {
+      line-height: 1.1em;
+    }
+
+    d-abstract p, d-article p {
+      text-align: justify;
+    }
+
+    @media(min-width: 1000px) {
+      .d-contents.d-contents-float {
+        justify-self: end;
+      }
+
+      nav.toc {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-right-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .posts-list .dt-tags .dt-tag {
+      text-transform: lowercase;
+    }
+
+    @keyframes highlight-target {
+      0% {
+        background-color: #ffa;
+      }
+      66% {
+        background-color: #ffa;
+      }
+      100% {
+        background-color: none;
+      }
+    }
+
+    d-article :target, d-appendix :target {
+       animation: highlight-target 3s;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"An Empirical Exploration of the Vibrant R Ecosystem","description":"Created in the late 20th century, R is one of the most popular software environments for statistical computing and graphics. Embracing the development of information technology and the advent of the big data era, great changes have taken place in the R ecosystem during recent years.  An empirical review is carried out based on meta-information of CRAN and bibliometric data of the literature citing R. We discovered that while initiated by statistics, the development of R benefited greatly from software developers and users coming from various disciplines such as agricultural, biological, environmental, and medical science. In addition, we show the collaboration patterns among R developers and analyze the possible effects of collaboration in the R community. By exploring the R ecosystem and making critical discussions, we intend to gain a better understanding of the current R ecosystem and provide a reference for the ecosystem's future development.","doi":"10.32614/reco","authors":[{"author":"Tian-Yuan Huang","authorURL":"#","affiliation":"National Science Library, Chinese Academy of Sciences","affiliationURL":"#","orcidID":"0000-0002-4151-3764"},{"author":"Liying Yang","authorURL":"#","affiliation":"National Science Library, Chinese Academy of Sciences","affiliationURL":"#","orcidID":""}]}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>An Empirical Exploration of the Vibrant R Ecosystem</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Created in the late 20th century, R is one of the most popular
+software environments for statistical computing and graphics. Embracing
+the development of information technology and the advent of the big data
+era, great changes have taken place in the R ecosystem during recent
+years. An empirical review is carried out based on meta-information of
+CRAN and bibliometric data of the literature citing R. We discovered
+that while initiated by statistics, the development of R benefited
+greatly from software developers and users coming from various
+disciplines such as agricultural, biological, environmental, and medical
+science. In addition, we show the collaboration patterns among R
+developers and analyze the possible effects of collaboration in the R
+community. By exploring the R ecosystem and making critical discussions,
+we intend to gain a better understanding of the current R ecosystem and
+provide a reference for the ecosystem’s future development.</p></p>
+</div>
+
+<div class="d-byline">
+  Tian-Yuan Huang  (National Science Library, Chinese Academy of
+Sciences)
+  
+,   Liying Yang  (National Science Library, Chinese Academy of Sciences)
+  
+
+</div>
+
+<div class="d-article">
+<h1 id="introduction">Introduction</h1>
+<p>Among the various programming languages, R is famous for its
+capability in data mining. Yet, the TIOBE Index for programming
+languages has found a decreasing trend in the use of R from 2018 to 2019
+(<a href="https://www.tiobe.com/tiobe-index/r/"
+class="uri">https://www.tiobe.com/tiobe-index/r/</a>). While few people
+dig into the details of how this index is calculated, this popular index
+did bring panic and depressed some R users and developers, even those
+who had been using R for years. But according to the download logs of
+CRAN (the Comprehensive R Archive Network), neither R software nor R
+packages are facing a reduction in the downloads during this period
+(Figure <a href="#fig:fig1">1</a>). On the contrary, there was a remarkable leap in
+the latter half of 2018. The data shows that August 2018 was the tipping
+point for the number of downloads (at monthly level), both for R
+software and R packages. There is no doubt that R has been used by more
+people and more frequently over time.</p>
+<p>As a programming language, R’s free open-source environment was
+derived from the S language, developed at Bell Labs during the
+seventies. The R core was first launched in 1997 and is maintained by
+the R Core Team and R Foundation since then. The public management of R
+packages is mainly supported by CRAN, while other major repositories
+include BioConductor, R-Forge, and GitHub <span class="citation"
+data-cites="GermanAdams-562 PlakidasSchall-561">(<a
+href="#ref-GermanAdams-562" role="doc-biblioref">German et al. 2013</a>;
+<a href="#ref-PlakidasSchall-561" role="doc-biblioref">Plakidas et al.
+2017</a>)</span>. While these repositories have overlapping packages,
+CRAN remains the center of the R package management system <span
+class="citation" data-cites="DecanMens-557">(<a
+href="#ref-DecanMens-557" role="doc-biblioref">Decan et al.
+2015</a>)</span>. The usage of R is extensive and gradually R has become
+one of the most popular softwares in scientific research. This has led
+scientists to pay more attention to the scientific usage of R packages.
+Related investigations focus on the co-mentioning network of R packages
+<span class="citation" data-cites="LiYan-560">(<a href="#ref-LiYan-560"
+role="doc-biblioref">Li and Yan 2018</a>)</span> and citation patterns
+of specific or general R packages <span class="citation"
+data-cites="LiChen-558 LiYan-559">(<a href="#ref-LiYan-559"
+role="doc-biblioref">Li et al. 2017</a>, <a href="#ref-LiChen-558"
+role="doc-biblioref">2019</a>)</span>. In addition, numerous studies
+have shown that researchers and practitioners from various backgrounds
+embrace R for its openness and reproducibility <span class="citation"
+data-cites="GentlemanCarey-499 PebesmaNst-498 HuberCarey-496 LowndesBest-495 KayaAgca-491 LaiLortie-492">(<a
+href="#ref-GentlemanCarey-499" role="doc-biblioref">Gentleman et al.
+2004</a>; <a href="#ref-PebesmaNst-498" role="doc-biblioref">Pebesma et
+al. 2012</a>; <a href="#ref-HuberCarey-496" role="doc-biblioref">Huber
+et al. 2015</a>; <a href="#ref-LowndesBest-495"
+role="doc-biblioref">Lowndes et al. 2017</a>; <a
+href="#ref-KayaAgca-491" role="doc-biblioref">Kaya et al. 2019</a>; <a
+href="#ref-LaiLortie-492" role="doc-biblioref">Lai et al.
+2019</a>)</span>, though creating and maintaining software itself is not
+generally recognized as an academic accomplishment <span
+class="citation" data-cites="YangRousseau">(<a href="#ref-YangRousseau"
+role="doc-biblioref">Yang et al. 2018</a>)</span>.</p>
+<p>In this paper, we would like to suggest a new framework for the R
+ecosystem and provide an empirical review of it based on the metadata
+from CRAN (<a href="https://cran.r-project.org/"
+class="uri">https://cran.r-project.org/</a>) and Scopus, the well-known
+database provided by Elsevier (<a href="https://www.scopus.com/"
+class="uri">https://www.scopus.com/</a>). The concept of a software
+ecosystem was first suggested around 2000 <span class="citation"
+data-cites="MesserschmittSzyperski-609">(<a
+href="#ref-MesserschmittSzyperski-609"
+role="doc-biblioref">Messerschmitt and Szyperski 2003</a>)</span>, and
+developed rapidly in the following years <span class="citation"
+data-cites="IansitiLevien-615 Hanssen-614 ManikasHansen-611 Jansen-613">(<a
+href="#ref-IansitiLevien-615" role="doc-biblioref">Iansiti and Levien
+2004</a>; <a href="#ref-Hanssen-614" role="doc-biblioref">Hanssen
+2012</a>; <a href="#ref-ManikasHansen-611" role="doc-biblioref">Manikas
+and Hansen 2013</a>; <a href="#ref-Jansen-613"
+role="doc-biblioref">Jansen 2014</a>)</span>. By drawing upon the
+well-established concept of an “ecosystem” in ecology, this approach
+tries to classify members into different components, investigate their
+characteristics, and study their interactions. In this way community
+members from possibly segregated sections benefit by seeing how they are
+part of the whole. Extending this concept to the open-source software
+community, research on open source ecosystems has been carried out for
+various programming languages, including Ruby <span class="citation"
+data-cites="KabbedijkJansen-623 SyeedHansen-624">(<a
+href="#ref-KabbedijkJansen-623" role="doc-biblioref">Kabbedijk and
+Jansen 2011</a>; <a href="#ref-SyeedHansen-624"
+role="doc-biblioref">Syeed et al. 2014</a>)</span>, Python <span
+class="citation" data-cites="HovingSlot-617">(<a
+href="#ref-HovingSlot-617" role="doc-biblioref">Hoving et al.
+2013</a>)</span>, and R <span class="citation"
+data-cites="GermanAdams-562 PlakidasSchall-561 DecanMens-557">(<a
+href="#ref-GermanAdams-562" role="doc-biblioref">German et al. 2013</a>;
+<a href="#ref-DecanMens-557" role="doc-biblioref">Decan et al. 2015</a>;
+<a href="#ref-PlakidasSchall-561" role="doc-biblioref">Plakidas et al.
+2017</a>)</span>.</p>
+<p>Previous studies suggest that the R ecosystem consists of three main
+areas, namely the R platform, the software marketplace(s), and the
+community <span class="citation" data-cites="PlakidasSchall-561">(<a
+href="#ref-PlakidasSchall-561" role="doc-biblioref">Plakidas et al.
+2017</a>)</span>. Inspired by this framework, we provide some
+adjustments and extensions to make the software ecosystem more similar
+to a biological ecosystem. The proposed framework for the R ecosystem is
+displayed in Figure <a href="#fig:fig2">2</a>. Software developers act as producers
+of the ecosystem, they build tools and provide products (e.g., R
+packages) for the users (considered as consumers). General users have
+various demands for the statistical designers (considered as
+decomposers) according to their tasks. Then, the statistical designers
+propose multiple algorithms to meet the needs of the users, and the
+required algorithms are then transferred to the software developers to
+make better products. In addition, the developers must provide a
+software platform for the statistical designers, so that they can test
+their ideas and schemes. While these three groups of members may
+overlap, abstracting these roles helps us understand different driving
+models of the development of the R ecosystem. Based on this framework,
+we explore four specific questions from different perspectives.</p>
+<ol type="1">
+<li>From the perspective of software developers: what are the most
+popular R packages over the late 15 years since 2005 and why?</li>
+<li>From the perspective of academic users: which fields do they come
+from and why are they using R?</li>
+<li>From the perspective of statistical designers: what motivate them to
+develop R packages?</li>
+<li>From the perspective of the global R community: How do they
+collaborate and to what extent?</li>
+</ol>
+<p>By exploring these questions and making critical discussions, we
+intend to gain a better understanding of the current R ecosystem and
+shape the future development of R.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig1"></span>
+<img src="fig1.png" alt="The daily downloads of R software (a) and R packages (b). The boxplots show the daily number of downloads in a month. The blue lines show the average daily download in each year, and the dashed red line indicates where the number of downloads shows a sudden change (yielded by changepoint package). Source of data: http://cran-logs.rstudio.com/. " width="80%" height="50%" />
+<p class="caption">
+Figure 1: The daily downloads of R software (a) and R packages (b). The
+boxplots show the daily number of downloads in a month. The blue lines
+show the average daily download in each year, and the dashed red line
+indicates where the number of downloads shows a sudden change (yielded
+by changepoint package). Source of data: <a
+href="http://cran-logs.rstudio.com/"
+class="uri">http://cran-logs.rstudio.com/</a>.
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig2"></span>
+<img src="fig2.png" alt="Framework of the R ecosystem in our study. This resembles the biological ecosystem which consists of three main roles, namely producers, consumers, and decomposers. " width="100%" height="30%" />
+<p class="caption">
+Figure 2: Framework of the R ecosystem in our study. This resembles the
+biological ecosystem which consists of three main roles, namely
+producers, consumers, and decomposers.
+</p>
+</div>
+</div>
+<h1 id="data-and-software">Data and software</h1>
+<p>To get a comprehensive view of the R ecosystem, multiple data sources
+are collected and utilized, namely (1) Download information of R and R
+packages. These download logs were accessed from Rstudio CRAN Mirror (<a
+href="http://cran-logs.rstudio.com/"
+class="uri">http://cran-logs.rstudio.com/</a>), and information on the
+daily number of downloads was retrieved via APIs from <a
+href="https://cran.r-project.org/package=cranlogs">cranlogs</a> package;
+(2) Metadata of R packages on CRAN. The metadata of R packages, such as
+their authors, maintainers, published date and imported packages
+(dependent packages),are archived in CRAN. These data were extracted
+using <a href="https://cran.r-project.org/package=RWsearch">RWsearch</a>
+package. The target data in our research was retrieved on January 1st,
+2020; (3) Bibliometric data of papers citing R: The bibliometric data
+could helped us to explore how R is utilized in academia. Referring to
+the previous research <span class="citation" data-cites="LiYan-559">(<a
+href="#ref-LiYan-559" role="doc-biblioref">Li et al. 2017</a>)</span>,
+our study retrieved the bibliometric data of papers citing R software
+from Scopus using advanced search (the advanced query was “REF ({R: A
+Language and Environment for Statistical Computing} OR {<a
+href="http://www.r-project.org"
+class="uri">http://www.r-project.org</a>}) AND DOCTYPE (ar)”), yielding
+364,928 articles published from 2005 to 2019. The <a
+href="https://cran.r-project.org/package=rscopus">rscopus</a> package
+was used to facilitate the acquisition of bibliometric data from Scopus.
+The bibliometric data contains information of publication year, title,
+keywords, journal title, ISSN, etc. Scopus Subject Area categories were
+used to classify the publications into different subjects. The data
+analyses were carried out in R software. The R packages used in the
+study include <a
+href="https://cran.r-project.org/package=tidyverse">tidyverse</a>, , <a
+href="https://cran.r-project.org/package=patchwork">patchwork</a>, <a
+href="https://cran.r-project.org/package=changepoint">changepoint</a>,
+<a href="https://cran.r-project.org/package=lubridate">lubridate</a>, <a
+href="https://cran.r-project.org/package=fst">fst</a>, <a
+href="https://cran.r-project.org/package=akc">akc</a>, <a
+href="https://cran.r-project.org/package=graphlayouts">graphlayouts</a>
+and <a
+href="https://cran.r-project.org/package=tidyfst">tidyfst</a>.</p>
+<h1 id="method-and-results">Method and results</h1>
+<h2 id="popular-r-packages">Popular R packages</h2>
+<p>Examining the most downloaded R packages in total on CRAN between
+2005 and 2019, we found that the top 10 R packages (Figure
+<a href="#fig:fig3">3</a>a) have a share of about 10% of the total downloads. These
+packages provide essential functionalities for further development in
+the R ecosystem. Among them, <a
+href="https://cran.r-project.org/package=ggplot2">ggplot2</a>, <a
+href="https://cran.r-project.org/package=stringr">stringr</a> (a wrapper
+of <a href="https://cran.r-project.org/package=stringi">stringi</a>), <a
+href="https://cran.r-project.org/package=dplyr">dplyr</a> might be the
+best known to end-users because they are completely data-oriented and
+easy to use with consistent and readable APIs. Furthermore, packages
+like <a href="https://cran.r-project.org/package=Rcpp">Rcpp</a>, <a
+href="https://cran.r-project.org/package=digest">digest</a>, <a
+href="https://cran.r-project.org/package=rlang">rlang</a> and <a
+href="https://cran.r-project.org/package=R6">R6</a> brought great
+convenience to R programmers (especially software developers), and thus
+are often imported by other packages during R development. Especially,
+<a href="https://cran.r-project.org/package=magrittr">magrittr</a> and
+<a href="https://cran.r-project.org/package=tibble">tibble</a>, add
+fundamental functionalities to other packages. Simply representing “and
+then” in natural language, the operator <code>%&gt;%</code> in <a
+href="https://cran.r-project.org/package=magrittr">magrittr</a> is
+elementary for R as a language. This implementation is in line with the
+logic of human thinking. It reduces development time and improves the
+readability and maintainability of R code. As the pipe syntax has gained
+recognition and acceptance, on May 18, 2021, a native pipe
+(<code>|&gt;</code>) was introduced in the released R version 4.1.0.
+Moreover, considering R as an environment, “data frame” is an important
+data structure (a two-dimension table with rows and columns), and <a
+href="https://cran.r-project.org/package=tibble">tibble</a> has offered
+an enhanced class (named ‘tibble’ or ‘tbl_df’) for it. This redesigned
+class provides end-users the means to inspect the traditional data frame
+fast and safely. Therefore, it is adopted by many other R packages and
+widely used in data science workflows, especially for big data
+analysis.</p>
+<p>Turning to the list of monthly downloads (Figure <a href="#fig:fig3">3</a>b), we
+see more packages designed for R developers are releasing, including <a
+href="https://cran.r-project.org/package=pillar">pillar</a>, <a
+href="https://cran.r-project.org/package=lifecycle">lifecycle</a>, <a
+href="https://cran.r-project.org/package=cli">cli</a> and <a
+href="https://cran.r-project.org/package=fansi">fansi</a>. As a
+complementary component to string operation, <a
+href="https://cran.r-project.org/package=glue">glue</a> is also gaining
+popularity and becomes the main package imported in other utilities
+(including <a
+href="https://cran.r-project.org/package=stringr">stringr</a>). Finally,
+as part of the “cloudyr” project (<a href="https://cloudyr.github.io/"
+class="uri">https://cloudyr.github.io/</a>), the rise of the and the
+package has revealed another trend, namely using and developing R in a
+cloud computing platform. To conclude, the popularity of modern R mainly
+depends on software facilities provided by the R environment, which
+greatly improves the reliability and efficiency of data science
+workflows.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig3"></span>
+<img src="fig3.png" alt="Top 10 R packages (a) by total downloads and (b) by monthly downloads from 2005 to 2019 since publication. " width="100%" height="30%" />
+<p class="caption">
+Figure 3: Top 10 R packages (a) by total downloads and (b) by monthly
+downloads from 2005 to 2019 since publication.
+</p>
+</div>
+</div>
+<h2 id="applications-of-r-in-academia">Applications of R in
+academia</h2>
+<p>According to Scopus, the number of academic articles citing R
+software has been steadily increasing from 2005 to 2019 (Figure
+<a href="#fig:fig4">4</a>a). While only 1057 citations were tracked in 2005, the
+number of articles citing the R software has reached a total of 62,168
+citations in 2019. Considering the subject area of these articles, we
+found a remarkable upward trend of R usage in “Agricultural and
+Biological Sciences”, “Biochemistry, Genetics, and Molecular Biology”,
+“Earth and Planetary Sciences”, “Environmental Science”, “Immunology and
+Microbiology”, “Medicine”, “Psychology” and “Social Sciences” (Figure
+<a href="#fig:fig4">4</a>b). This is probably due to the flourishing of measurement
+methods and data sciences in these scientific fields. During this period
+of 15 years “Agricultural and Biological Sciences” and “Environmental
+Science” turned out to be the most active subject areas using R (Figure
+<a href="#fig:fig4">4</a>c and Figure <a href="#fig:fig4">4</a>d). Not only did they publish
+most articles based on R (106,853 and 51,522 respectively), but they
+also had the highest percentage of articles utilizing R (4.5% and 3.3%
+respectively). Although, intuitively, “Computer Science” and
+“Mathematics” should be considered most relevant to R, they had a
+relatively low number of articles citing R. From 2005 to 2019, there
+were 10,111 articles categorized as “Mathematics” citing R (0.7% within
+the subject area), whereas in “Computer Science” there were only 7,164
+articles citing R (0.5% within the subject area).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig4"></span>
+<img src="fig4.png" alt="Usage of R in academia between 2005 and 2019. (a) Growth of academic articles citing R software. (b) The number of articles citing R software in different subject areas over time. (c) Top 10 subjects with most articles citing R software. (d) Top 10 subjects with the largest proportion of articles citing R software. The subject classification is based on the list of Scopus Subject Area (AGRI: Agricultural and Biological Sciences; ARTS: Arts and Humanities; BIOC: Biochemistry, Genetics, and Molecular Biology; BUSI: Business, Management, and accounting; CENG: Chemical Engineering; CHEM: Chemistry; COMP: Computer Science; DECI: Decision Sciences; DENT: Dentistry; EART: Earth and Planetary Sciences; ECON: Economics, Econometrics, and Finance; ENER: Energy; ENGI: Engineering; ENVI: Environmental Science; HEAL: Health Professionals; IMMU: Immunology and Microbiology; MATE: Materials Science; MATH: Mathematics; MEDI: Medicine; MULT: Multidisciplinary; NEUR: Neuroscience; NURS: Nursing; PHAR: Pharmacology, Toxicology, and Pharmaceutics; PHYS: Physics and Astronomy; PSYC: Psychology; SOCI: Social Sciences; VETE: Veterinary). " width="100%" height="50%" />
+<p class="caption">
+Figure 4: Usage of R in academia between 2005 and 2019. (a) Growth of
+academic articles citing R software. (b) The number of articles citing R
+software in different subject areas over time. (c) Top 10 subjects with
+most articles citing R software. (d) Top 10 subjects with the largest
+proportion of articles citing R software. The subject classification is
+based on the list of Scopus Subject Area (AGRI: Agricultural and
+Biological Sciences; ARTS: Arts and Humanities; BIOC: Biochemistry,
+Genetics, and Molecular Biology; BUSI: Business, Management, and
+accounting; CENG: Chemical Engineering; CHEM: Chemistry; COMP: Computer
+Science; DECI: Decision Sciences; DENT: Dentistry; EART: Earth and
+Planetary Sciences; ECON: Economics, Econometrics, and Finance; ENER:
+Energy; ENGI: Engineering; ENVI: Environmental Science; HEAL: Health
+Professionals; IMMU: Immunology and Microbiology; MATE: Materials
+Science; MATH: Mathematics; MEDI: Medicine; MULT: Multidisciplinary;
+NEUR: Neuroscience; NURS: Nursing; PHAR: Pharmacology, Toxicology, and
+Pharmaceutics; PHYS: Physics and Astronomy; PSYC: Psychology; SOCI:
+Social Sciences; VETE: Veterinary).
+</p>
+</div>
+</div>
+<h2 id="functionalities-of-r-packages">Functionalities of R
+packages</h2>
+<p>We extracted the keywords from the “description” field of R packages
+listed on CRAN and constructed a keyword co-occurrence network to
+explore initiatives for developing R packages. To complete this task,
+we:</p>
+<ol type="1">
+<li>used an n-gram tokenizer to segment the corpus. The n-gram in our
+context means a contiguous sequence of n items from a given sample of
+text. The maximum and minimum of n were 5 and 2 respectively. Unigrams
+were excluded because they are too rough to carry accurate information.
+This process yielded the n-grams for each R package.</li>
+<li>filtered the n-grams using a user-defined dictionary based on
+keywords from the literature. More precisely, we used a reverse query to
+get all the literature that cited R software in the Scopus database, and
+then used the author keywords of these publications to form an R-related
+dictionary. Then the n-grams obtained in the previous step were filtered
+by the dictionary (only phrases in the dictionary were retained).</li>
+<li>merged synonyms within the R package. Keywords with the same stem
+were merged into their most frequent form. In addition, if a keyword is
+a subset of another, it is merged with the shorter one. For instance,
+“time series” and “time series analysis” were merged into “time series”
+(but they would not be merged into “time” because we have excluded
+unigrams).</li>
+<li>constructed and made a visualization of a knowledge graph based on
+keyword co-occurrence in R packages. Nodes in the network are keywords
+of the R packages, edges between nodes mean that two keywords
+co-occurred in the description of the same package. Both the frequency
+(number of packages mentioning specific keywords) and degree of the
+keywords (in the co-mentioning network) were obtained and displayed in
+the visualization.</li>
+</ol>
+<p>In Figure <a href="#fig:fig5">5</a>, we see that many R packages are data-driven
+(the degree of “data sets” is the largest). For the top 50 keywords by
+frequency, only “hypothesis testing” never co-occurs with “data sets”.
+Most of these keywords fall into the category of statistics, such as
+“time series”, “linear regression” and “parameter estimation”. This is
+not surprising, as R was first created by statisticians and designed to
+be a freely available language and environment for statistical computing
+and graphics <span class="citation" data-cites="IhakaGentleman-501">(<a
+href="#ref-IhakaGentleman-501" role="doc-biblioref">Ihaka and Gentleman
+1996</a>)</span>. Nonetheless, there are also other kinds of keywords.
+For instance, keywords like “user interface” and “web service” fall into
+the category of computer science, while keywords like “gene expression”
+and “meta-analysis” are part of domain-specific applications.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig5"></span>
+<img src="fig5.png" alt="Knowledge graph of R based on package description archived on CRAN. Only the top 50 keywords with the highest frequency are displayed. The width of an edge is proportional to the number of co-occurrences. The graph adopted a radial layout around a focal node wherein the most frequent keyword is selected as the focal node (namely 'data sets' with 539 occurrences). " width="100%" height="40%" />
+<p class="caption">
+Figure 5: Knowledge graph of R based on package description archived on
+CRAN. Only the top 50 keywords with the highest frequency are displayed.
+The width of an edge is proportional to the number of co-occurrences.
+The graph adopted a radial layout around a focal node wherein the most
+frequent keyword is selected as the focal node (namely ‘data sets’ with
+539 occurrences).
+</p>
+</div>
+</div>
+<h2 id="collaboration-patterns-in-the-r-community">Collaboration
+patterns in the R community</h2>
+<p>An inspection of the CRAN meta information shows that the number of
+authors of a package has a long-tail distribution (Figure
+<a href="#fig:fig6">6</a>a). By 2019, 6,645 packages are single-authored, followed
+by 3,677 with two, 2,227 with three, 1,177 with four, and 599 with five.
+There are, moreover, 1022 packages written by more than five authors. We
+see that the number of authors writing a package is roughly distributed
+according to Lotka’s square law. This differs with the academic world,
+where the ubiquity of teams and the demise of the lone author <span
+class="citation" data-cites="WuchtyJones-607">(<a
+href="#ref-WuchtyJones-607" role="doc-biblioref">Wuchty et al.
+2007</a>)</span>. When a package has more than one author, we assume
+that it was written in collaboration. From this perspective, we found
+more cooperative works than single-author ones (8702 v. 6645).
+Investigating the possible effects of collaboration (Figure
+<a href="#fig:fig6">6</a>b, <a href="#fig:fig6">6</a>c, <a href="#fig:fig6">6</a>d), we found a positive
+correlation between the number of authors of a package and the number of
+imported packages (Pearson, r = 0.16, p &lt; 2.2e-16), daily download
+times (Pearson, r = 0.09, p &lt; 2.2e-16) and number of updates per year
+(Pearson, r = 0.20, p &lt; 2.2e-16). These results indicate that the
+collaborative behavior of R developers might help to reuse and integrate
+more sources in the R community and improve the efficiency of the
+development of R packages. Moreover, R packages resulting from teamwork
+may gain more popularity. This phenomenon is also common in academia,
+where collaborative study attracts more citations than comparable solo
+research <span class="citation" data-cites="WuchtyJones-607">(<a
+href="#ref-WuchtyJones-607" role="doc-biblioref">Wuchty et al.
+2007</a>)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig6"></span>
+<img src="fig6.png" alt="Collaboration patterns in R community. (a) Distribution of the number of authors of R packages (packages with more than 15 authors are omitted). (b) Correlation between the number of authors and the number of imported packages. (c) Correlation between the number of authors and the daily number of downloads. (d) Correlation between the number of authors and the number of updates per year. The legends show how many packages lie in the blocks. " width="100%" height="50%" />
+<p class="caption">
+Figure 6: Collaboration patterns in R community. (a) Distribution of
+the number of authors of R packages (packages with more than 15 authors
+are omitted). (b) Correlation between the number of authors and the
+number of imported packages. (c) Correlation between the number of
+authors and the daily number of downloads. (d) Correlation between the
+number of authors and the number of updates per year. The legends show
+how many packages lie in the blocks.
+</p>
+</div>
+</div>
+<h1 id="discussion">Discussion</h1>
+<p>From the analysis above, we can speculate about the different driving
+models (Figure <a href="#fig:fig7">7</a>) based on the R ecosystem framework
+(Figure <a href="#fig:fig2">2</a>) proposed at the start of this paper. As members
+from the R ecosystem often hold more than one roles, we further make
+abstraction of the roles in the proposed R ecosystem (software
+facilities provided by software developers, statistical tools provided
+by statistical designers and real-world problems suggested by general
+users).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig7"></span>
+<img src="fig7.png" alt="The driving models of the R ecosystem from different perspectives. (a) From the perspective of statistics. (b) From the perspective of computer science. (c) From the perspective of users. " width="100%" height="30%" />
+<p class="caption">
+Figure 7: The driving models of the R ecosystem from different
+perspectives. (a) From the perspective of statistics. (b) From the
+perspective of computer science. (c) From the perspective of users.
+</p>
+</div>
+</div>
+<p>R was first designed by Ross Ihaka and Robert Gentleman, both
+statisticians interested in computer programming, as a personal project
+to build statistical tools in a teaching laboratory <span
+class="citation" data-cites="Ihaka-500">(<a href="#ref-Ihaka-500"
+role="doc-biblioref">Ihaka 1998</a>)</span>. Hence R can be regarded as
+a fruit of the interplay between statistics and computer science. Yet,
+few people would consider R as a serious programming language, but
+rather as an environment for statistical computation. In textbooks of R,
+students would be taught how to generate random numbers and draw its
+distributions, whereas in textbooks of C, Java, Python, etc., after
+their “Hello, World!” program, they are more likely to learn different
+types of data structures and algorithms. Generally, the development of R
+is deeply rooted in statistics, a fact that still can be seen in today’s
+R ecosystem (Figure <a href="#fig:fig5">5</a>). Usually, statistical researchers
+would propose new ideas and implement these ideas in R, and then test
+them in the real world (Figure <a href="#fig:fig7">7</a>a). A convenient package
+designed by statisticians provides users with easy-to-use APIs and tries
+to guide them to discover more with the help of additional settings
+provided by parameters. In this way, even users without any background
+knowledge could utilize the cutting-edge statistical tools in their
+work. At the same time, they might discover issues about the usage and
+give feedback to the package maintainers. This information then helps
+them to improve the statistical tools. It is good practice for
+developers to keep complete documentation about their work. We found
+that the packages with vignette builder have more downloads than those
+which have not (11,499 v. 7,073 based on monthly averages). Moreover,
+packages with an URL – providing extra information - hold a higher
+number of downloads (13,950 v. 3,223 again based on monthly
+averages).</p>
+<p>While R is initiated by statistics, recent years have seen a host of
+popular packages designed for tasks not directly related to statistics,
+such as high-performance computing (<a
+href="https://cran.r-project.org/package=Rcpp">Rcpp</a>, , <a
+href="https://cran.r-project.org/package=doParallel">doParallel</a>,
+etc.), string operations (<a
+href="https://cran.r-project.org/package=stringi">stringi</a>, <a
+href="https://cran.r-project.org/package=stringr">stringr</a>, <a
+href="https://cran.r-project.org/package=glue">glue</a>, etc.) and
+connection to other software (<a
+href="https://cran.r-project.org/package=openxlsx">openxlsx</a>, <a
+href="https://cran.r-project.org/package=pdftools">pdftools</a>, <a
+href="https://cran.r-project.org/package=sparklyr">sparklyr</a>, etc.).
+Generally, these tasks could be categorized as software facilities, and
+these facilities have likely acted as cornerstones supporting the R
+ecosystem (Figure <a href="#fig:fig7">7</a>b). According to our investigation, the
+usage of R in computer science is relatively infrequent in academia, but
+the R packages providing software facilities are among the most popular
+ones. As R gets more popular in multiple fields, developers from
+different backgrounds are considering building a more comprehensive
+ecosystem for it (e.g. more user-friendly interface on top and
+high-performance computing at bottom). Currently, the light-weighted R
+software could carry out complicated computations on million rows of
+data within minutes, and at the same time storing and exporting these
+results to dashboards in expressive graphics and tables. In the field of
+data science, the versatile R is not in the least inferior to Python,
+which is well-known for its “glue” feature. On the other hand, while
+there are many statistical tools wrapped in R packages, end-users might
+find it difficult to use them directly in practical applications,
+because the various application scenarios might not be considered
+thoroughly in the early stage of development. Software facilities,
+serving as a bridge between statistical tools and real-world problems,
+can fill this gap. For instance, some advanced statistical methods might
+for the moment only be accessible in R, but the real data are stored in
+different file formats (docx, pdf, tiff, json, etc.). Only by developing
+file conversion tools can end-users upscale the power of statistics
+shared in the community. These tools, serving as software facilities,
+are so popular that they may gain more attention than other specific
+statistical tools. This is because the functionalities software
+facilities provide are considered to be more general and irreplaceable
+in the workflow, whereas R provides various alternatives in statistical
+methods. In the future, the R community would attract more talents with
+a solid computer science background. The sparks between computer science
+and statistics could lead to an amazing revolution in the community and
+lift the R ecosystem to a higher level.</p>
+<p>Although R is rooted in statistics and developed by computer
+techniques, the fruit of R is shared on a much broader scale. We found
+that in academia, a huge group of researchers from various fields are
+benefiting from R. Usually, they start their research from real-world
+problems, make hypotheses, and seek the right tools to provide evidence
+(Figure <a href="#fig:fig7">7</a>c). These scientific areas are often characterized
+by embracing the advent of big data and moving toward evidence-based
+quantitative science. In such cases, R has turned out to be one of the
+most appropriate tools. In a time in which science emphasizes that
+academic results must be reproducible, the documented R scripts provide
+evidence for inspection and validation of the whole data science
+workflow. Moreover, as the readability of R is rising rapidly, there
+seems to be a trend for researchers to communicate and collaborate using
+R. A well-designed syntax of the R language could be comprehended by
+even non-programmers. Moreover, these codes could also be run
+effectively and efficiently in the computer to reproduce the exact same
+results based on openly shared data. Not only does R provide researchers
+with powerful computational tools to lower the barrier of statistical
+implementation, but it also provides an opportunity to facilitate open
+science through its design and community culture. This trend could also
+create a breeding ground for knowledge transfer and cross-disciplinary
+research, as the operational tools (R codes) and statistical logics
+underneath can be shared and passed from field to field.</p>
+<p>With the joint effort from statisticians, computer scientists and
+general users from versatile backgrounds, the ecosystem of R has become
+unprecedentedly energetic and diverse in the recent two decades. On CRAN
+we can usually find packages with single authors because the open-source
+community allows developers to reuse codes freely as long as the license
+is not violated. Therefore, when new users start to develop with R and
+import functions from other packages, they are standing on the shoulders
+of each other already. This feature can be considered an advanced form
+of communication and collaboration. Nevertheless, our investigation
+shows that there are positive correlations between the number of authors
+of packages and the imports, updates, and downloads, which indicates
+that teamwork generally improves creativity, developmental efficiency,
+and software impact. A large number of local and international R
+communities (rOpenSci, RLadies, RStudio, RUGS, etc.), online or offline,
+commercial or non-commercial, are emerging and flourishing vigorously
+these years. While they have various scopes and organizational forms,
+the core spirit of R remains in every one of them, namely to be free,
+open, and collaborative, leading to worldwide progress. Therefore, just
+forget about the TIOBE Index or the aggressive comparisons with other
+programming languages. R is here to stay and there is a bright future to
+come.</p>
+<h1 id="acknowledgements">Acknowledgements</h1>
+<p>The authors thank Ronald Rousseau for useful remarks about their
+work.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 class="appendix" id="cran-packages-used">CRAN packages used</h2>
+<p><a href="https://cran.r-project.org/package=cranlogs">cranlogs</a>,
+<a href="https://cran.r-project.org/package=RWsearch">RWsearch</a>, <a
+href="https://cran.r-project.org/package=rscopus">rscopus</a>, <a
+href="https://cran.r-project.org/package=tidyverse">tidyverse</a>, <a
+href="https://cran.r-project.org/package=data.table">data.table</a>, <a
+href="https://cran.r-project.org/package=patchwork">patchwork</a>, <a
+href="https://cran.r-project.org/package=changepoint">changepoint</a>,
+<a href="https://cran.r-project.org/package=lubridate">lubridate</a>, <a
+href="https://cran.r-project.org/package=fst">fst</a>, <a
+href="https://cran.r-project.org/package=akc">akc</a>, <a
+href="https://cran.r-project.org/package=graphlayouts">graphlayouts</a>,
+<a href="https://cran.r-project.org/package=tidyfst">tidyfst</a>, <a
+href="https://cran.r-project.org/package=ggplot2">ggplot2</a>, <a
+href="https://cran.r-project.org/package=stringr">stringr</a>, <a
+href="https://cran.r-project.org/package=stringi">stringi</a>, <a
+href="https://cran.r-project.org/package=dplyr">dplyr</a>, <a
+href="https://cran.r-project.org/package=Rcpp">Rcpp</a>, <a
+href="https://cran.r-project.org/package=digest">digest</a>, <a
+href="https://cran.r-project.org/package=rlang">rlang</a>, <a
+href="https://cran.r-project.org/package=R6">R6</a>, <a
+href="https://cran.r-project.org/package=magrittr">magrittr</a>, <a
+href="https://cran.r-project.org/package=tibble">tibble</a>, <a
+href="https://cran.r-project.org/package=pillar">pillar</a>, <a
+href="https://cran.r-project.org/package=lifecycle">lifecycle</a>, <a
+href="https://cran.r-project.org/package=cli">cli</a>, <a
+href="https://cran.r-project.org/package=fansi">fansi</a>, <a
+href="https://cran.r-project.org/package=glue">glue</a>, <a
+href="https://cran.r-project.org/package=aws.s3">aws.s3</a>, <a
+href="https://cran.r-project.org/package=aws.ec2metadata">aws.ec2metadata</a>,
+<a href="https://cran.r-project.org/package=doParallel">doParallel</a>,
+<a href="https://cran.r-project.org/package=openxlsx">openxlsx</a>, <a
+href="https://cran.r-project.org/package=pdftools">pdftools</a>, <a
+href="https://cran.r-project.org/package=sparklyr">sparklyr</a></p>
+<h2 class="appendix" id="cran-task-views-implied-by-cited-packages">CRAN
+Task Views implied by cited packages</h2>
+<p><a href="https://cran.r-project.org/view=Databases">Databases</a>, <a
+href="https://cran.r-project.org/view=Epidemiology">Epidemiology</a>, <a
+href="https://cran.r-project.org/view=Finance">Finance</a>, <a
+href="https://cran.r-project.org/view=HighPerformanceComputing">HighPerformanceComputing</a>,
+<a
+href="https://cran.r-project.org/view=ModelDeployment">ModelDeployment</a>,
+<a
+href="https://cran.r-project.org/view=NaturalLanguageProcessing">NaturalLanguageProcessing</a>,
+<a
+href="https://cran.r-project.org/view=NumericalMathematics">NumericalMathematics</a>,
+<a
+href="https://cran.r-project.org/view=ReproducibleResearch">ReproducibleResearch</a>,
+<a href="https://cran.r-project.org/view=Spatial">Spatial</a>, <a
+href="https://cran.r-project.org/view=TeachingStatistics">TeachingStatistics</a>,
+<a href="https://cran.r-project.org/view=TimeSeries">TimeSeries</a>, <a
+href="https://cran.r-project.org/view=WebTechnologies">WebTechnologies</a></p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-DecanMens-557" class="csl-entry" role="doc-biblioentry">
+A. Decan, T. Mens, M. Claes and P. Grosjean. On the development and
+distribution of r packages: An empirical analysis of the r ecosystem.
+2015.
+</div>
+<div id="ref-GentlemanCarey-499" class="csl-entry"
+role="doc-biblioentry">
+R. C. Gentleman, V. J. Carey, D. M. Bates, B. Bolstad, M. Dettling, S.
+Dudoit, B. Ellis, L. Gautier, Y. Ge, J. Gentry, et al. Bioconductor:
+Open software development for computational biology and bioinformatics.
+<em>Genome Biology</em>, 5(10): R80, 2004. DOI <a
+href="https://doi.org/10.1186/gb-2004-5-10-r80">10.1186/gb-2004-5-10-r80</a>.
+</div>
+<div id="ref-GermanAdams-562" class="csl-entry" role="doc-biblioentry">
+D. M. German, B. Adams and A. E. Hassan. The evolution of the r software
+ecosystem. In <em>17th european conference on software maintenance and
+reengineering</em>, pages. 243–252 2013. IEEE.
+</div>
+<div id="ref-Hanssen-614" class="csl-entry" role="doc-biblioentry">
+G. K. Hanssen. A longitudinal case study of an emerging software
+ecosystem: Implications for practice and theory. <em>Journal of Systems
+and Software</em>, 85(7): 1455–1466, 2012.
+</div>
+<div id="ref-HovingSlot-617" class="csl-entry" role="doc-biblioentry">
+R. Hoving, G. Slot and S. Jansen. Python: Characteristics identification
+of a free open source software ecosystem. In <em>2013 7th IEEE
+international conference on digital ecosystems and technologies
+(DEST)</em>, pages. 13–18 2013.
+</div>
+<div id="ref-HuberCarey-496" class="csl-entry" role="doc-biblioentry">
+W. Huber, V. J. Carey, R. Gentleman, S. Anders, M. Carlson, B. S.
+Carvalho, H. C. Bravo, S. Davis, L. Gatto, T. Girke, et al.
+Orchestrating high-throughput genomic analysis with bioconductor.
+<em>Nature Methods</em>, 12(2): 115–121, 2015. DOI <a
+href="https://doi.org/10.1038/nmeth.3252">10.1038/nmeth.3252</a>.
+</div>
+<div id="ref-IansitiLevien-615" class="csl-entry"
+role="doc-biblioentry">
+M. Iansiti and R. Levien. Strategy as ecology. <em>Harvard business
+review</em>, 82(3): 68–78, 2004.
+</div>
+<div id="ref-Ihaka-500" class="csl-entry" role="doc-biblioentry">
+R. Ihaka. R: Past and future history. <em>Computing Science and
+Statistics</em>, 392-396: 1998.
+</div>
+<div id="ref-IhakaGentleman-501" class="csl-entry"
+role="doc-biblioentry">
+R. Ihaka and R. Gentleman. R: A language for data analysis and graphics.
+<em>Journal of computational and graphical statistics</em>, 5(3):
+299–314, 1996.
+</div>
+<div id="ref-Jansen-613" class="csl-entry" role="doc-biblioentry">
+S. Jansen. Measuring the health of open source software ecosystems:
+Beyond the scope of project health. <em>Information and Software
+Technology</em>, 56(11): 1508–1519, 2014.
+</div>
+<div id="ref-KabbedijkJansen-623" class="csl-entry"
+role="doc-biblioentry">
+J. Kabbedijk and S. Jansen. Steering insight: An exploration of the ruby
+software ecosystem. In <em>International conference of software
+business</em>, pages. 44–55 2011. Springer.
+</div>
+<div id="ref-KayaAgca-491" class="csl-entry" role="doc-biblioentry">
+E. Kaya, M. Agca, F. Adiguzel and M. Cetin. Spatial data analysis with r
+programming for environment. <em>Human and Ecological Risk Assessment:
+An International Journal</em>, 25(6): 1521–1530, 2019. DOI <a
+href="https://doi.org/10.1080/10807039.2018.1470896">10.1080/10807039.2018.1470896</a>.
+doi: 10.1080/10807039.2018.1470896 doi: 10.1080/10807039.2018.1470896.
+</div>
+<div id="ref-LaiLortie-492" class="csl-entry" role="doc-biblioentry">
+J. Lai, C. J. Lortie, R. A. Muenchen, J. Yang and K. Ma. Evaluating the
+popularity of r in ecology. <em>Ecosphere</em>, 10(1): e02567, 2019.
+</div>
+<div id="ref-LiChen-558" class="csl-entry" role="doc-biblioentry">
+K. Li, P.-Y. Chen and E. Yan. Challenges of measuring software impact
+through citations: An examination of the lme4 r package. <em>Journal of
+Informetrics</em>, 13(1): 449–461, 2019.
+</div>
+<div id="ref-LiYan-560" class="csl-entry" role="doc-biblioentry">
+K. Li and E. Yan. Co-mention network of r packages: Scientific impact
+and clustering structure. <em>Journal of Informetrics</em>, 12(1):
+87–100, 2018.
+</div>
+<div id="ref-LiYan-559" class="csl-entry" role="doc-biblioentry">
+K. Li, E. Yan and Y. Feng. How is r cited in research outputs?
+Structure, impacts, and citation standard. <em>Journal of
+Informetrics</em>, 11(4): 989–1002, 2017.
+</div>
+<div id="ref-LowndesBest-495" class="csl-entry" role="doc-biblioentry">
+J. S. S. Lowndes, B. D. Best, C. Scarborough, J. C. Afflerbach, M. R.
+Frazier, C. C. O Hara, N. Jiang and B. S. Halpern. Our path to better
+science in less time using open data science tools. <em>Nature ecology
+and evolution</em>, 1(6): 0160, 2017.
+</div>
+<div id="ref-ManikasHansen-611" class="csl-entry"
+role="doc-biblioentry">
+K. Manikas and K. M. Hansen. Software ecosystems-a systematic literature
+review. <em>Journal of Systems and Software</em>, 86(5): 1294–1306,
+2013.
+</div>
+<div id="ref-MesserschmittSzyperski-609" class="csl-entry"
+role="doc-biblioentry">
+D. G. Messerschmitt and C. Szyperski. <em>Software ecosystem:
+Understanding an indispensable technology and industry.</em> MIT press,
+2003.
+</div>
+<div id="ref-PebesmaNst-498" class="csl-entry" role="doc-biblioentry">
+E. Pebesma, D. Nust and R. Bivand. The r software environment in
+reproducible geoscientific research. <em>Eos, Transactions American
+Geophysical Union</em>, 93(16): 163–163, 2012. DOI <a
+href="https://doi.org/10.1029/2012EO160003">10.1029/2012EO160003</a>.
+</div>
+<div id="ref-PlakidasSchall-561" class="csl-entry"
+role="doc-biblioentry">
+K. Plakidas, D. Schall and U. Zdun. Evolution of the r software
+ecosystem: Metrics, relationships, and their impact on qualities.
+<em>Journal of Systems and Software</em>, 132: 119–146, 2017.
+</div>
+<div id="ref-SyeedHansen-624" class="csl-entry" role="doc-biblioentry">
+M. M. Syeed, K. M. Hansen, I. Hammouda and K. Manikas. Socio-technical
+congruence in the ruby ecosystem. In <em>Proceedings of the
+international symposium on open collaboration</em>, pages. 1–9 2014.
+</div>
+<div id="ref-WuchtyJones-607" class="csl-entry" role="doc-biblioentry">
+S. Wuchty, B. F. Jones and B. Uzzi. The increasing dominance of teams in
+production of knowledge. <em>Science</em>, 316(5827): 1036–1039, 2007.
+DOI <a
+href="https://doi.org/10.1126/science.1136099">10.1126/science.1136099</a>.
+doi: 10.1126/science.1136099 2021/12/27 doi: 10.1126/science.1136099.
+</div>
+<div id="ref-YangRousseau" class="csl-entry" role="doc-biblioentry">
+B. Yang, R. Rousseau, X. Wang and S. Huang. How important is scientific
+software in bioinformatics research? A comparative study between
+international and chinese research communities. <em>Journal of the
+Association for Information Science and Technology</em>, 69(9):
+1122–1133, 2018. URL <a
+href="https://asistdl.onlinelibrary.wiley.com/doi/abs/10.1002/asi.24031">https://asistdl.onlinelibrary.wiley.com/doi/abs/10.1002/asi.24031</a>.
+</div>
+</div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
